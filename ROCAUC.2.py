@@ -102,12 +102,12 @@ class Solution:
         sorted_by_value_target = cls._sort_target_in_each_equal_range_value(
             sorted_value, sorted_by_value_target
         )
-
+        
         deb0 = cls._number_of_non_inversions(sorted_by_value_target)
         deb2 = cls._number_of_non_inversions(sorted_target)
         deb3 = cls._count_combinations_of_pairs(sorted_target)
         deb4 = cls._count_equal_target(sorted_value, sorted_by_value_target)
-
+        
         numerator = deb0 - deb3 - deb4 / 2
         denominator = deb2 - deb3
 
@@ -129,11 +129,19 @@ class Solution:
 
         mergeSort = MergeSort()
 
+        ts = time()
         deb4 = cls._count_equal_target(sorted_value, sorted_by_value_target)
+        print('deb4', time()-ts)
+        ts = time()
         deb0 = mergeSort.mergeSort(sorted_by_value_target, len(sorted_by_value_target))
+        print('deb0', time()-ts)
+        ts = time()
         deb2 = int(cls._number_of_pairs(sorted_by_value_target))
+        print('deb2', time()-ts)
+        ts = time()
         deb3 = cls._count_combinations_of_pairs(sorted_by_value_target)
-        
+        print('deb3', time()-ts)
+        ts = time()
 
         numerator = deb2 - deb0 - deb3 - deb4 / 2
         denominator = deb2 - deb3
@@ -271,9 +279,9 @@ else:
             target.append(t)
             value.append(v)
         with open("output.txt", "w") as output_file:
-            #output_file.write(str(sol.roc_auc(target=target, value=value)))
+            #sol.roc_auc_less_memory(target=target, value=value)
             output_file.write(str(sol.roc_auc_less_memory(target=target, value=value)))
         # write(sol.roc_auc(target=target, value=value))
-        write(time() - ts)
+        write('finnaly',time() - ts)
         #write(tracemalloc.get_traced_memory())
         #tracemalloc.stop()
