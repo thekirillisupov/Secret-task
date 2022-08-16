@@ -207,7 +207,6 @@ class Solution:
     @classmethod
     def _number_of_non_inversions_in_equal_target(cls, arr: List[float]) -> int:
         try:
-            arr = arr
             return cls._number_of_non_inversions(
                 arr
             ) - cls._count_combinations_of_pairs(arr)
