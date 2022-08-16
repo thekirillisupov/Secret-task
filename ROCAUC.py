@@ -90,33 +90,7 @@ class Solution:
         ...
 
     @classmethod
-    # @timing
     def roc_auc(cls, target: List[float], value: List[float]) -> float:
-        """
-        Calculate ROCAUC
-
-        find number inversion in index_sorted_by_value_target
-        """
-        index_sorted_value = np.argsort(value)
-        sorted_target = np.sort(target)
-        sorted_value = np.array(value)[index_sorted_value]
-        sorted_by_value_target = np.array(target)[index_sorted_value]
-        sorted_by_value_target = cls._sort_target_in_each_equal_range_value(
-            sorted_value, sorted_by_value_target
-        )
-
-        deb0 = cls._number_of_non_inversions(sorted_by_value_target)
-        deb2 = cls._number_of_non_inversions(sorted_target)
-        deb3 = cls._count_combinations_of_pairs(sorted_target)
-        deb4 = cls._count_equal_target(sorted_value, sorted_by_value_target)
-
-        numerator = deb0 - deb3 - deb4 / 2
-        denominator = deb2 - deb3
-
-        return numerator / denominator
-
-    @classmethod
-    def roc_auc_less_memory(cls, target: List[float], value: List[float]) -> float:
 
         index_sorted_value = np.argsort(value)
         sorted_value = np.array(value)[index_sorted_value]
@@ -234,8 +208,7 @@ else:
             target.append(t)
             value.append(v)
         with open("output.txt", "w") as output_file:
-            # sol.roc_auc_less_memory(target=target, value=value)
-            output_file.write(str(Solution.roc_auc_less_memory(target=target, value=value)))
+            output_file.write(str(Solution.roc_auc(target=target, value=value)))
         # write(sol.roc_auc(target=target, value=value))
         #write("finnaly", time() - ts)
         # write(tracemalloc.get_traced_memory())
