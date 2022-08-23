@@ -1,4 +1,4 @@
-# Yandex-task
+# Generalized ROC AUC
 To be selected for an internship, Yandex offered to solve the following problem.
 
 Suggest we have $N$ objects. Calculate the generalized metric AUC, which determine by the following formula.
